@@ -1,7 +1,8 @@
-import express from 'express'
+import logger from './config/logger'
+import app from './server'
 
-const app = express()
+const port: number = Number(process.env.PORT)
 
-app.listen(3000, () => {
-	console.log('Hello from this part of the world')
+app.listen(port, () => {
+	logger.info(`[⚡️ server :] server connected to https://localhost:${port}`)
 })
