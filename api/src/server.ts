@@ -1,9 +1,9 @@
 require('dotenv').config({ path: './src/config/.env.dev' })
 import express, { Request, Response } from 'express'
-import logger from './config/logger'
 import compression from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
+import authenticationRoute from './routers/auth.routers'
 
 /**
  * * cors options
@@ -35,12 +35,14 @@ const app = express()
 app.use(compression())
 app.use(cors(corsOptions))
 app.use(helmet(helmetOptions))
+app.use(express.json())
 
 app.get('/', cors(corsOptions), (request: Request, response: Response) => {
-	logger.info('Api Homepage', 'successful')
 	response.send({
 		message: 'WELCOME TO UNISELL API',
 	})
 })
+
+app.use('/api/v1/auth/', authenticationRoute)
 
 export default app

@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom'
 import RootApp from './components/pages/RootApp'
 import App from './App'
+import Login from './components/pages/Login'
+import Register from './components/pages/Register'
 
 const routerService = createBrowserRouter(
 	createRoutesFromElements(
@@ -19,6 +21,14 @@ const routerService = createBrowserRouter(
 			<Route
 				index
 				element={<App />}
+			/>
+			<Route
+				path='login'
+				element={<Login />}
+			/>
+			<Route
+				path='register'
+				element={<Register />}
 			/>
 		</Route>
 	)
