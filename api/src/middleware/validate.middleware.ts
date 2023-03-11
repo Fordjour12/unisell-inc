@@ -23,4 +23,4 @@ const validator =
 		}
 	}
 
-export { validator }
+export default validator

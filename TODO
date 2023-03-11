@@ -6,7 +6,12 @@ Todo:
     ☐ client section 
 
   API:
-    ☐ api section 
+    authenticaiton:
+      ☐ Registration
+      ☐ Authentication
+      ☐ Update
+      ☐ Rest Password
+
 
   TEST:
     ☐ create a test point area
