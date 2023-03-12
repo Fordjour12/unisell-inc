@@ -1,4 +1,4 @@
-import { TypeOf, z } from 'zod'
+import { boolean, TypeOf, z } from 'zod'
 
 const authRegistrationSchema = z.object({
 	body: z
@@ -18,9 +18,13 @@ const authRegistrationSchema = z.object({
 				})
 				.min(8, 'Password must be 8 characters or more')
 				.max(40, 'Password must be less than 40 characters'),
-			confirmPassword: z.string({
-				required_error: 'Password confirmation is required',
-			}),
+			confirmPassword: z
+				.string({
+					required_error: 'Password confirmation is required',
+				})
+				.min(8, 'Password must be 8 characters or more')
+				.max(40, 'Password must be less than 40 characters'),
+			emailVerified: boolean().default(false),
 		})
 		.refine((data) => data.password === data.confirmPassword, {
 			path: ['confirmPassword'],
@@ -33,5 +37,26 @@ type authRegistrationSchemaInput = Omit<
 	'confirmPassword'
 >
 
-const authSignInSchema = z.object({})
-export { authRegistrationSchema, authSignInSchema, authRegistrationSchemaInput }
+const authSignInSchema = z.object({
+	body: z.object({
+		email: z
+			.string({ required_error: 'Email is required' })
+			.trim()
+			.email('Invalid Email Address'),
+		password: z
+			.string({
+				required_error: 'Password is required',
+			})
+			.min(8, 'Password must be 8 characters or more')
+			.max(40, 'Password must be less than 40 characters'),
+	}),
+})
+
+type authSignInSchemaInput = TypeOf<typeof authSignInSchema>['body']
+
+export {
+	authRegistrationSchema,
+	authSignInSchema,
+	authRegistrationSchemaInput,
+	authSignInSchemaInput,
+}

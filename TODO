@@ -6,12 +6,28 @@ Todo:
     ☐ client section 
 
   API:
-    authenticaiton:
-      ☐ Registration
-      ☐ Authentication
+    schema:
+      ☐ seeding
+      ✔ validation @done(23-03-12 01:02)
+      ☐ schema models
+
+    controller:
+      ✔ Registration @done(23-03-12 00:24)
+      Authentication:
+        ✔ check if user exist @done(23-03-12 00:24)
+        ✔ compare passwords @done(23-03-12 00:25)
+        ☐ generate access token,Refresh token 
+        ☐ validate a value to prevent xss and csrf
       ☐ Update
       ☐ Rest Password
 
+    services:
+      ✔ find unique user @done(23-03-11 23:08)
+      ✔ create user @done(23-03-11 23:08)
+    
+
+
+    
 
   TEST:
     ☐ create a test point area

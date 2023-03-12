@@ -4,6 +4,10 @@ import compression from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
 import authenticationRoute from './routers/auth.routers'
+import {
+	errorRequestHandler,
+	notFoundRequest,
+} from './middleware/notFound.middleware'
 
 /**
  * * cors options
@@ -44,5 +48,8 @@ app.get('/', cors(corsOptions), (request: Request, response: Response) => {
 })
 
 app.use('/api/v1/auth/', authenticationRoute)
+
+app.use(notFoundRequest)
+app.use(errorRequestHandler)
 
 export default app

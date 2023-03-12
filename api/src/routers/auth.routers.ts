@@ -1,7 +1,10 @@
 import { Response, Router } from 'express'
-import { registerAuthenticationController } from '../controller/auth.controllers'
+import {
+	registerAuthenticationController,
+	signInAuthenticationController,
+} from '../controller/auth.controllers'
 import validator from '../middleware/validate.middleware'
-import { authRegistrationSchema } from '../schema/auth.schema'
+import { authRegistrationSchema, authSignInSchema } from '../schema/auth.schema'
 
 const authenticationRoute = Router()
 
@@ -15,6 +18,12 @@ authenticationRoute.post(
 	'/signup',
 	validator(authRegistrationSchema),
 	registerAuthenticationController
+)
+
+authenticationRoute.post(
+	'/login',
+	validator(authSignInSchema),
+	signInAuthenticationController
 )
 
 export default authenticationRoute
