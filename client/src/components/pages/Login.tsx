@@ -2,7 +2,7 @@ import Input from '../layout/Input'
 
 function Login() {
 	return (
-		<div className='flex flex-col items-center justify-center h-screen'>
+		<form className='flex flex-col items-center justify-center h-screen'>
 			<Input
 				SvgIcons={
 					<svg
@@ -87,7 +87,14 @@ function Login() {
 				Type='password'
 				Placeholder='Enter Passwords Here'
 			/>
-		</div>
+
+			<button
+				type='submit'
+				className='text-white py-3 bg-blue-300 px-10 rounded'
+			>
+				login here
+			</button>
+		</form>
 	)
 }
 

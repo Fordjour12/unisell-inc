@@ -1,15 +1,7 @@
-import reactLogo from './assets/react.svg'
-import Header from './components/ui/Header'
+import Homepage from './components/pages/Homepage'
 
 function App() {
-	return (
-		<div className='grid grid-cols-[500px,1fr]'>
-			<aside>
-				<Header />
-			</aside>
-			<div>body</div>
-		</div>
-	)
+	return <Homepage />
 }
 
 export default App
