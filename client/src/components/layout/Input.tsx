@@ -1,42 +1,38 @@
+import { ChangeEvent, forwardRef } from 'react'
+
 interface InputField {
-	Type: string
-	HtmlFor: string
+	HTMLFor: string
+	Types: string
 	Placeholder: string
-	SvgIcons: JSX.Element
+	SvgIcon: JSX.Element
+	// eslint-disable-next-line react/require-default-props
+	OnChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-interface LabelField {
-	children: JSX.Element | JSX.Element[]
-	LabelName: string
-}
-
-export function Label({ children, LabelName }: LabelField) {
-	return (
+const InputForm = forwardRef<HTMLInputElement, InputField>(
+	({ HTMLFor, Types, Placeholder, SvgIcon, OnChange }: InputField, ref) => (
 		<label
-			htmlFor={`${LabelName}`}
+			htmlFor={`${HTMLFor}`}
 			className='flex gap-8 bg-purple-500 py-4 px-3 w-[60%] my-4'
 		>
-			{children}
-		</label>
-	)
-}
-
-function Input({ HtmlFor, Placeholder, SvgIcons, Type }: InputField) {
-	return (
-		<Label LabelName={`${HtmlFor}`}>
 			<div className='flex gap-2'>
-				<span>{SvgIcons}</span>
-				<span>{HtmlFor}</span>
+				<span>{SvgIcon}</span>
+				<p>{HTMLFor}</p>
 			</div>
+
 			<input
 				className='bg-inherit w-full outline-none'
-				type={`${Type}`}
-				name={`${HtmlFor}`}
-				id=''
+				type={`${Types}`}
+				name={`${HTMLFor}`}
+				id={`${HTMLFor}`}
 				placeholder={`${Placeholder}`}
+				ref={ref}
+				onChange={OnChange}
 			/>
-		</Label>
+		</label>
 	)
-}
+)
 
-export default Input
+InputForm.displayName = 'input'
+
+export default InputForm
