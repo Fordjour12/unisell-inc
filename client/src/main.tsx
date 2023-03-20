@@ -11,12 +11,14 @@ import RootApp from './components/pages/RootApp'
 import App from './App'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register'
+import Error from './components/pages/Error'
 
 const routerService = createBrowserRouter(
 	createRoutesFromElements(
 		<Route
 			path='/'
 			element={<RootApp />}
+			errorElement={<Error />}
 		>
 			<Route
 				index

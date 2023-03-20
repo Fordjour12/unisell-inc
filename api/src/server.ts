@@ -8,6 +8,7 @@ import {
 	errorRequestHandler,
 	notFoundRequest,
 } from './middleware/notFound.middleware'
+import morgan from 'morgan'
 
 /**
  * * cors options
@@ -40,6 +41,7 @@ app.use(compression())
 app.use(cors(corsOptions))
 app.use(helmet(helmetOptions))
 app.use(express.json())
+app.use(morgan('dev'))
 
 app.get('/', cors(corsOptions), (request: Request, response: Response) => {
 	response.send({

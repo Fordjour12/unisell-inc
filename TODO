@@ -8,9 +8,11 @@ Todo:
     Desktop:
       ☐  Navigation Bar
       registration Form:
-        ☐ design form
+        ✔ design form @done(23-03-17 20:42)
+        ☐ TanStack Query
         ☐ hook up to api 
-        ☐ validation on frontend
+        ✔ validation on frontend input with zod Resolvers and react-form-Hooks @done(23-03-20 09:53)
+        ✔ zod password regex @done(23-03-20 09:58)
         ☐ Redirect user to visit email
     Mobile App:
 

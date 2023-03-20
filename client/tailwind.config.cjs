@@ -6,6 +6,11 @@ module.exports = {
 			animation: {
 				'spin-slow': 'spin 3s linear infinite',
 			},
+			colors: {
+				unisell: {
+					100: '#7161EF',
+				},
+			},
 		},
 	},
 	plugins: [],
