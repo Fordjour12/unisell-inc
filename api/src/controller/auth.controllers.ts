@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
-import prisma from '../helpers/prisma.helpers'
 import {
 	findUniqueUserInfo,
 	registerAuthenticationServices,
@@ -10,14 +9,13 @@ import {
 	authRegistrationSchemaInput,
 	authSignInSchemaInput,
 } from '../schema/auth.schema'
-import { resolve } from 'path'
 
 const registerAuthenticationController = async (
 	request: Request<{}, {}, authRegistrationSchemaInput>,
 	response: Response,
 	next: NextFunction
 ) => {
-	const { name, email, password } = request.body
+	const { username, email, password } = request.body
 
 	try {
 		const userInfoData = findUniqueUserInfo({ email: email })
@@ -26,7 +24,7 @@ const registerAuthenticationController = async (
 				message: 'User Already Exist Please LogIn',
 				data: {
 					email: (await userInfoData).email,
-					name: (await userInfoData).name,
+					username: (await userInfoData).username,
 				},
 			})
 			return
@@ -35,7 +33,7 @@ const registerAuthenticationController = async (
 		const hashedPassword = await bcrypt.hash(password, salt)
 
 		const UserData = await registerAuthenticationServices({
-			name,
+			username,
 			email,
 			password: hashedPassword,
 		})
@@ -65,7 +63,7 @@ const signInAuthenticationController = async (
 
 		const userInfoData = findUniqueUserInfo(
 			{ email: email },
-			{ email: true, id: true, password: true, name: true }
+			{ email: true, id: true, password: true, username: true }
 		)
 		if (!(await userInfoData)) {
 			response.status(409).json({

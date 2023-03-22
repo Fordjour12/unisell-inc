@@ -9,18 +9,21 @@ import {
 	notFoundRequest,
 } from './middleware/notFound.middleware'
 import morgan from 'morgan'
+import logger from './config/logger'
 
-/**
- * * cors options
- * */
+// /**
+//  * * cors options
+//  * */
 
 const whitelistDomains = [process.env.DOMAIN_1, process.env.DOMAIN_2]
+logger.info(process.env.DOMAIN_1)
 
 const corsOptions = {
 	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 	origin: function (origin: any, callback: any) {
 		if (whitelistDomains.indexOf(origin) !== -1 || !origin) {
 			callback(null, true)
+			logger.info(whitelistDomains)
 		} else {
 			callback(new Error('Blocked By CORS'))
 		}
@@ -43,7 +46,7 @@ app.use(helmet(helmetOptions))
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.get('/', cors(corsOptions), (request: Request, response: Response) => {
+app.get('/', (request: Request, response: Response) => {
 	response.send({
 		message: 'WELCOME TO UNISELL API',
 	})

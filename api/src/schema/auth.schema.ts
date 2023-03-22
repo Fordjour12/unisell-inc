@@ -3,7 +3,7 @@ import { boolean, TypeOf, z } from 'zod'
 const authRegistrationSchema = z.object({
 	body: z
 		.object({
-			name: z
+			username: z
 				.string({ required_error: 'Name is required' })
 				.trim()
 				.min(3, 'Name must contain at least 3 characters')

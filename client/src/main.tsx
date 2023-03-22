@@ -7,6 +7,7 @@ import {
 	RouterProvider,
 	Route,
 } from 'react-router-dom'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import RootApp from './components/pages/RootApp'
 import App from './App'
 import Login from './components/pages/Login'
@@ -36,8 +37,12 @@ const routerService = createBrowserRouter(
 	)
 )
 
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<RouterProvider router={routerService} />
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider router={routerService} />
+		</QueryClientProvider>
 	</React.StrictMode>
 )

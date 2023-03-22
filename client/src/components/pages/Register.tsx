@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'react-router-dom'
 import InputForm from '../ui/Input'
@@ -8,7 +9,7 @@ import {
 	RegisterInputValidationSchema,
 	RegisterInputValidationSchemaTypes,
 } from '../../utils/zod.validation'
-import { inputData } from '../../utils/input.data'
+import { signUpUsersFn } from '../../utils/api.utils'
 
 function Register() {
 	// form validation
@@ -28,9 +29,31 @@ function Register() {
 		}
 	}, [isSubmitSuccessful])
 
+	const {
+		mutate: registerUser,
+		isLoading,
+		isError,
+	} = useMutation(
+		(userData: RegisterInputValidationSchemaTypes) =>
+			signUpUsersFn(userData),
+		{
+			onSuccess: (successData) => {
+				console.log(successData)
+			},
+		}
+	)
+
+	if (isLoading) {
+		return <p>Loading ...</p>
+	}
+	if (isError) {
+		return <p>error ...</p>
+	}
+
 	const onSubmitHandler: SubmitHandler<RegisterInputValidationSchemaTypes> = (
 		values
 	) => {
+		registerUser(values)
 		console.log(values)
 	}
 
@@ -84,7 +107,7 @@ function Register() {
 							/>
 							<InputForm
 								htmlFor='confirmPassword'
-								label='ConfrimPassword'
+								label='ConfirmPassword'
 								placeholder='password@134'
 								type='password'
 							/>
